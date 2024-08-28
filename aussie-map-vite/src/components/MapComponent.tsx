@@ -38,11 +38,13 @@ function colorMap(
   colors: string[]
 ): Record<string, string> {
   const regionColors: Record<string, string> = {};
-  const availableColors: boolean[] = new Array(colors.length).fill(true);
+  const colorUsageCount: Record<string, number> = colors.reduce((acc, color) => {
+    acc[color] = 0;
+    return acc;
+  }, {} as Record<string, number>);
 
   for (let i = 0; i < regions.length; i++) {
-    availableColors.fill(true);
-
+    const availableColors: boolean[] = new Array(colors.length).fill(true);
     for (let j = 0; j < regions.length; j++) {
       if (adjacencyMatrix[i][j] === 1 && regionColors[regions[j]]) {
         const colorIndex = colors.indexOf(regionColors[regions[j]]);
@@ -50,9 +52,14 @@ function colorMap(
       }
     }
 
-    const colorIndex = availableColors.findIndex((available) => available);
-    if (colorIndex !== -1) {
+    const colorIndex = availableColors
+      .map((available, index) => (available ? index : -1))
+      .filter((index) => index !== -1)
+      .sort((a, b) => colorUsageCount[colors[a]] - colorUsageCount[colors[b]])[0];
+
+    if (colorIndex !== undefined) {
       regionColors[regions[i]] = colors[colorIndex];
+      colorUsageCount[colors[colorIndex]] += 1;
     } else {
       console.error(`No available color for region: ${regions[i]}`);
     }
