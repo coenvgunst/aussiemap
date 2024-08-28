@@ -1,0 +1,1 @@
+This is a small project where I apply the four color theorem in a typescript project. Showing each Australian state with a different color while no bordering states share the same color. Feel free to leave feedback :)
