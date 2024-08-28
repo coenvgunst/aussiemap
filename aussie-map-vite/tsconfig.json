@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",                      // The JavaScript version to compile to.
+    "module": "ESNext",                      // Module system to use.
+    "jsx": "react-jsx",                      // Allows JSX syntax in TypeScript files.
+    "strict": true,                          // Enable all strict type checking options.
+    "esModuleInterop": true,                 // Enables emit interoperability between CommonJS and ES Modules.
+    "moduleResolution": "node",              // How modules are resolved.
+    "skipLibCheck": true,                    // Skip checking types of all declaration files.
+    "forceConsistentCasingInFileNames": true // Disallow inconsistently-cased references to the same file.
+  },
+  "include": ["src"],                        // Include all files in the src folder.
+  "exclude": ["node_modules"]                // Exclude node_modules folder.
+}
